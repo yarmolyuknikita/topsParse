@@ -1,0 +1,25 @@
+PODS:
+  - Bolts/Tasks (1.2.0)
+  - Expecta (1.0.0)
+  - OCMock (3.1.2)
+  - OHHTTPStubs (4.0.2)
+  - Parse (1.7.5):
+    - Bolts/Tasks (>= 1.2.0)
+  - Specta (1.0.2)
+
+DEPENDENCIES:
+  - Expecta
+  - OCMock
+  - OHHTTPStubs
+  - Parse
+  - Specta
+
+SPEC CHECKSUMS:
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
+  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  OHHTTPStubs: dbd1957d414659783e07b49c961940b7564c23d9
+  Parse: 7c0f115eff3e0cea3fac08d50bda47154edb8832
+  Specta: 9cec98310dca411f7c7ffd6943552b501622abfe
+
+COCOAPODS: 0.37.2
