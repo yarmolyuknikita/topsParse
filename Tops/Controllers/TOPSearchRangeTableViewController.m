@@ -18,17 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UINavigationBar *myBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 60)];
-    [self.view addSubview:myBar];
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    UINavigationBar *navigationBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 65)];
+    //do something like background color, title, etc you self
+    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Выбор радиусв"];
+    navigationBar.items = [NSArray arrayWithObject:item];
+    navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed)];
     
     
-    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Выбор радиуса"];
-    myBar.items = [NSArray arrayWithObject:item];
+}
 
-    //item.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    
-    //rangeCell = [[[NSBundle mainBundle] loadNibNamed:@"TOPSearchRangeTableViewCell" owner:self options:nil] objectAtIndex:0];
+- (void)backButtonPressed {
+    [self presentViewController:[TOPHomeViewController new] animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

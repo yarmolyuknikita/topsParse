@@ -13,6 +13,7 @@
 #import "TOPSearchRangeTableViewController.h"
 #import "TOPPlace.h"
 #import "TOPPlaceDescriptionViewController.h"
+#import <MBProgressHUD.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define METERS_PER_MILE 1609.344
@@ -137,6 +138,8 @@
     
     __weak TOPHomeViewController *safeSelf = self;
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
         if (!error) {
             safeSelf.userLocation = geoPoint;
@@ -147,6 +150,7 @@
             
             
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *qerror){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [safeSelf.mapView addAnnotations:objects];
             }];
             
@@ -181,6 +185,11 @@
                                                  name:@"RefreshDataWithFilters"
                                                object:nil];
     
+    [_findButton addTarget:self action:@selector(centerMapOnUserButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (IBAction)centerMapOnUserButtonClicked:(id)sender {
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
 }
 
 #pragma - mark MKMapView Delegate
@@ -200,22 +209,46 @@
     
     
 }
-- (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+- (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     NSLog(@"%s", __FUNCTION__);
 }
 
-- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
-{
-    MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc]     initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
     
-    newAnnotation.canShowCallout = YES;
-    newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    static NSString* AnnotationIdentifier = @"pinLocation";
+    MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
     
-    return newAnnotation;
+    if (!pinView) {
+        
+        MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        if (annotation == mapView.userLocation){
+            return nil;
+        }
+        else{
+            customPinView.image = [UIImage imageNamed:@"map-pin.png"];
+        }
+        //customPinView.animatesDrop = NO;
+        customPinView.canShowCallout = YES;
+        customPinView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        return customPinView;
+        
+    } else {
+        
+        pinView.annotation = annotation;
+    }
+    
+    return pinView;
+    
+//    MKPinAnnotationView *newAnnotation = [[MKPinAnnotationView alloc]     initWithAnnotation:annotation reuseIdentifier:@"pinLocation"];
+//    
+//    newAnnotation.canShowCallout = YES;
+//    newAnnotation.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//    
+//    return newAnnotation;
 }
 
-- (void) receivetNotification:(NSNotification *) notification
-{
+- (void) receivetNotification:(NSNotification *) notification {
+    
     if ([[notification name] isEqualToString:@"RefreshDataWithFilters"]){
         NSLog (@"Successfully received the test notification!");
         //NSString *temp = ([[notification userInfo] objectForKey:@"rangeFilter"]);
@@ -252,12 +285,12 @@
     CLLocationCoordinate2D location = _mapView.userLocation.coordinate;
     //PFGeoPoint *pointP = [PFGeoPoint geoPointWithLatitude:mapView.userLocation.coordinate.latitude longitude:mapView.userLocation.coordinate.longitude];
     
-    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-    point.coordinate = location;
-    point.title = @"Where am I?";
-    point.subtitle = @"I'm here!!!";
-    
-    [_mapView addAnnotation:point];
+//    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+//    point.coordinate = location;
+//    point.title = @"Where am I?";
+//    point.subtitle = @"I'm here!!!";
+//    
+//    [_mapView addAnnotation:point];
 }
 
 #pragma slider

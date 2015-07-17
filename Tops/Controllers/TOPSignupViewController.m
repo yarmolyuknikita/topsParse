@@ -9,12 +9,16 @@
 #import "TOPSignupViewController.h"
 #import "TOPHomeViewController.h"
 #import <Parse/PFUser.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "TOPRegistrationViewController.h"
+#import "TOPRegistrationLauncherViewController.h"
 
 @interface TOPSignupViewController ()
 
 @property (nonatomic) UIButton *signupButton;
 @property (nonatomic) UIButton *loginButton;
 @property (nonatomic) TOPHomeViewController *homeViewController;
+@property (nonatomic) UIActivityIndicatorView *indicator;
 
 @end
 
@@ -29,8 +33,8 @@
     
     _signupButton = [UIButton new];
     _signupButton.translatesAutoresizingMaskIntoConstraints = NO;
-    _signupButton.backgroundColor = [UIColor orangeColor];
-    [_signupButton setTitle:@"Sign up"
+    _signupButton.backgroundColor = [UIColor grayColor];
+    [_signupButton setTitle:@"Войти как мастер"
                    forState:UIControlStateNormal];
     [self.view addSubview:_signupButton];
     
@@ -41,8 +45,8 @@
     
     _loginButton = [UIButton new];
     _loginButton.translatesAutoresizingMaskIntoConstraints = NO;
-    _loginButton.backgroundColor = [UIColor orangeColor];
-    [_loginButton setTitle:@"Log in"
+    _loginButton.backgroundColor = [UIColor grayColor];
+    [_loginButton setTitle:@"Войти как клиент"
                   forState:UIControlStateNormal];
     [self.view addSubview:_loginButton];
     
@@ -57,25 +61,21 @@
                                                                         views:NSDictionaryOfVariableBindings(_loginButton, _signupButton)]];
     
     [_loginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_signupButton addTarget:self action:@selector(signupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+-(void)signupButtonPressed:(id)sender{
+    [self presentViewController:[TOPRegistrationLauncherViewController new]
+                       animated:YES
+                     completion:nil];
 }
 
 -(void)loginButtonPressed:(id)sender {
     
-    [PFUser logInWithUsernameInBackground:@"qwe" password:@"qwe"
-                                    block:^(PFUser *user, NSError *error) {
-                                        if (user) {
-                                            // Do stuff after successful login.
-                                            [self presentViewController:[TOPHomeViewController new]
-                                                               animated:YES
-                                                             completion:nil];
-                                            NSLog(@"Successfully logged in");
-
-                                        } else {
-                                            // The login failed. Check error to see why.
-                                            NSLog(@"fail to log in");
-                                        }
-                                    }];
+    [self presentViewController:[TOPHomeViewController new]
+                       animated:YES
+                     completion:nil];
     
 }
 

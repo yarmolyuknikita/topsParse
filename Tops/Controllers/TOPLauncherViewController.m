@@ -7,7 +7,7 @@
 //
 
 #import "TOPLauncherViewController.h"
-
+#import <Parse/PFUser.h>
 #import "TOPHomeViewController.h"
 #import "TOPSignupViewController.h"
 
@@ -26,15 +26,15 @@
 - (void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    //if([PFUser currentUser]){
+//    if([PFUser currentUser]){
 //        [self presentViewController:[TOPHomeViewController new]
 //                           animated:YES
 //                         completion:nil];
-    //}else{
+//    }else{
         [self presentViewController:[TOPSignupViewController new]
                            animated:YES
                          completion:nil];
-    //}
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

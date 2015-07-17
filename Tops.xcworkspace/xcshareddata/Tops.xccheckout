@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CFE917B9-C45F-4598-89DB-5271E0AFA277</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Tops</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BA6210A6811D04F4ADB5610557CAC7085ED5360B</key>
+		<string>https://github.com/yarmolyuknikita/topsParse.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Tops.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BA6210A6811D04F4ADB5610557CAC7085ED5360B</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/yarmolyuknikita/topsParse.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BA6210A6811D04F4ADB5610557CAC7085ED5360B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BA6210A6811D04F4ADB5610557CAC7085ED5360B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Tops</string>
+		</dict>
+	</array>
+</dict>
+</plist>

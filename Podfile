@@ -14,6 +14,8 @@ target :unit_tests, :exclusive => true do
 end
 
 pod 'Parse'
+pod 'MBProgressHUD'
+pod 'RDVKeyboardAvoiding'
 
 # Copy acknowledgements to the Settings.bundle
 
